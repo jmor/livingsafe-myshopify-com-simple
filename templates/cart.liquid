@@ -1,0 +1,81 @@
+{% include 'breadcrumb' %}
+<h1>My Cart</h1>
+<section id="cart">
+	{% if cart.item_count > 0 %}
+	<form action="/cart" method="post">
+		<!--START CART CONTENTS-->
+		<div class="twelve columns alpha omega">
+			<!-- START HEADERS-->
+			<div class="headers clearfix">
+				<div class="six columns alpha description">
+					Description
+				</div>
+				<div class="two columns price desktop">
+					Price
+				</div>
+				<div class="one columns quantity desktop">
+					Qty
+				</div>
+				<div class="two columns total desktop">
+					<span>Total</span>
+				</div>
+			</div>
+			<!-- END HEADERS-->
+			 {% for item in cart.items %}  
+			<!-- START ROW-->
+			<div class="row">
+				<div class="six columns alpha description">
+					<img src="{{ item.product.featured_image.src | product_img_url: 'compact' }}" alt="{{ item.title | escape }}" />
+					<div class="info">
+						<h3><a href="{{ item.product.url | within: collections.all }}">{{ item.title }}</a></h3>
+						<h4>{{ item.vendor }}</h4>
+						<p>{{ item.product.description | strip_html | truncatewords: 20 }}</p>
+						
+					</div>
+				</div>
+				<div class="two columns price desktop">
+					{{ item.price | money }} 
+				</div>
+				<div class="one columns quantity tr">
+					<input type="text" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" /> <p class="mobile">x {{ item.price | money }}</p>
+				</div>
+				<div class="two columns total desktop">
+					<span>{{ item.line_price | money }} </span>
+				</div>
+				<div class="one column remove omega desktop">
+					<a href="/cart/change?line={{ forloop.index }}&quantity=0">x</a>
+				</div>
+			</div>
+			<!-- END ROW-->
+			{% endfor %}
+		</div>
+		<!--END CART CONTENTS-->
+		<br class="clear">
+		<!--START TOTAL-->
+		<div class="twelve columns alpha omega row">
+			<div class="six columns alpha continue-shopping"><a href="/collections/all">« Continue Shopping</a></div>
+			<div class="six columns omega cart total"><h2>Total {{ cart.total_price | money }}</h2></div>
+		</div>
+		<!--END TOTAL-->
+		<br class="clear">
+		<!-- START ACTIONS -->
+		<div class="twelve columns alpha omega">
+			<div class="six columns alpha">
+				<textarea id="note" name="note" placeholder="Add a note to your order...">{{ cart.note }}</textarea>
+			</div>
+			<div class="six columns omega actions">
+		 		<input type="submit" id="update" name="update" value="Update" />
+				<input type="submit" id="checkout" name="checkout" value="Check Out" />
+				{% if additional_checkout_buttons %}
+				<div style="clear:both">
+				{{ content_for_additional_checkout_buttons }}
+				</div>
+				{% endif %}
+			</div>
+		</div>
+		<!-- END ACTIONS -->
+	</form>
+	{% else %}
+	 <p>It appears that your cart is currently empty! <a href="/collections/all">Continue Shopping</a>.</p>
+	{% endif %}
+</section>

@@ -1,0 +1,32 @@
+{% layout settings.customer_layout %}
+<!--START BREADCRUMB-->
+<div id="breadcrumb" class="desktop">
+	<a href="/">Home</a> &mdash; <a href="#" class="active">Register</a>
+</div>
+<div class="six columns alpha omega">
+	<div id="create-account">
+		<h1 class="accounts-title">Create Account</h1>
+		{% form 'create_customer' %}
+	      {{ form.errors | default_errors }}
+	      <div id="first_name" class="clearfix large_form">
+	        <label for="first_name" class="login">First Name</label>
+	        <input type="text" value="" name="customer[first_name]" id="first_name" class="long" size="30" />
+	      </div>
+	      <div id="last_name" class="clearfix large_form">
+	        <label for="last_name" class="login">Last Name</label>
+	        <input type="text" value="" name="customer[last_name]" id="last_name" class="long" size="30" />
+	      </div>
+	      <div id="email" class="clearfix large_form">
+	        <label for="email" class="login">Email Address</label>
+	        <input type="email" value="" name="customer[email]" id="email" class="long" size="30" />
+	      </div>
+	      <div id="password" class="clearfix large_form">
+	        <label for="password" class="login">Password</label>
+	        <input type="password" value="" name="customer[password]" id="password" class="long" size="30" />
+	      </div>
+	      <div class="action_bottom">
+	        <input type="submit" value="Create" />
+	      </div>
+	    {% endform %}
+	</div>
+</div>

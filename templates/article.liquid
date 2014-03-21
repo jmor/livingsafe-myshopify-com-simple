@@ -1,0 +1,97 @@
+{% include 'breadcrumb' %}
+<!--START BLOG-->
+<div class="twelve columns alpha omega">
+	<!--START POST-->
+	<article class="post {% if forloop.first %}first{% endif %} {% if forloop.last %}last{% endif %} clearfix">
+		<div class="two columns alpha date">
+			{{ article.published_at | date: '%d' }}
+			<span>{{ article.published_at | date: '%b' }}</span>
+		</div>
+		<div class="ten columns content  {% unless blog.comments_enabled? %}no-comments{% endunless %}   omega clearfix">
+			<h2>{{ article.title }}</h2>
+			<div class="info clearfix">
+				<div class="eight columns alpha">
+					Posted by <b>{{ article.author }}</b> {% if article.tags.size > 0 %}in {% for tag in article.tags %}<a href="{{ blog.url }}/tagged/{{tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}
+				</div>
+				{% if blog.comments_enabled? %}
+				<div class="two columns omega comment-count">
+					<a href="{{ article.url }}#comments">{{ article.comments_count }} Comments</a>
+				</div>
+				{% endif %}
+			</div>
+			<div class="wysiwyg">
+			{{ article.content }}
+			</div>
+			<!--START ACTIONS-->
+			<div class="actions">
+				<div class="back">
+					<a href="{{ blog.url }}">Back to posts</a>
+				</div>
+				<div class="social">
+					{% include 'social-sharing' %}
+				</div>
+			</div>
+			<!--END ACTIONS-->
+		</div>	
+	</article>
+	<!--END POST-->
+	<br class="break">
+	{% assign number_of_comments = article.comments_count %}
+	{% if comment and comment.created_at %}
+	  {% assign number_of_comments = article.comments_count | plus: 1 %}
+	{% endif %}
+	{% if blog.comments_enabled? %}
+	<!--START COMMENTS-->
+	<div class="ten columns offset-by-two alpha omega">
+		{% if number_of_comments > 0 %}
+		<section id="comments" class="clearfix">
+			<h2>{{ article.comments_count }} Comments</h2>
+			{% comment %}If a comment was just submitted with no blank field, let's show it.{% endcomment %}
+		    {% if comment and comment.created_at %}
+			<div class="comment">
+				<p> {{ comment.content }}</p>
+				<p class="author">Posted by {{ comment.author }} on {{ comment.created_at | date: "%B %d, %Y" }}</p>
+			</div>
+			{% endif %}
+			{% for comment in article.comments %}
+			<div class="comment">
+				<p> {{ comment.content }}</p>
+				<p class="author">Posted by {{ comment.author }} on {{ comment.created_at | date: "%B %d, %Y" }}</p>
+			</div>
+			{% endfor %}	
+		</section>
+		{% endif %}
+		<section id="post-comment">
+			{% if comment and comment.created_at %}
+			<p class="success">
+		    	{% if blog.moderated? %}
+		    	Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.
+		    	{% else %}
+		    	Your comment was posted successfully! Thank you!
+		    	{% endif %}
+		  	</p>
+			{% endif %}
+			<h2>Post A Comment</h2>
+			{% form article %}
+        {% if form.errors %}
+          {{ form.errors | default_errors }}
+        {% endif %}
+				<label for="comment-author">Your Name</label>
+				<input required class="long{% if form.errors contains "author" %} error{% endif %}" type="text" name="comment[author]" placeholder="Your name" id="comment-author" value="{{ form.author }}" />
+				<label for="comment-email">Your Email <span>(we never share this)</span></label>
+				<input required class="long {% if form.errors contains "email" %}error{% endif %}" type="email" name="comment[email]" placeholder="your@email.com" id="comment-email" value="{{ form.email }}" />
+				<label for="comment-body">Your Comment</label>
+				<textarea required class="long {% if form.errors contains "email" %}error{% endif %}" name="comment[body]" id="comment-body">{{ form.body }}</textarea>
+				<input type="submit" value="Post Comment" />
+        {% if form.errors or form.posted_successfully? %}
+        <script>
+        window.location.hash = '#post-comment';
+        </script>
+        {% endif %}
+			{% endform %}
+		</section>
+	</div>
+	<!--END COMMENTS-->
+	{% endif %}
+</div>
+<!--END BLOG-->

@@ -1,0 +1,74 @@
+{% if settings.show_frontpage_hero == true %}
+<!--START BANNER-->
+<div class="twelve columns alpha omega">
+	<section id="hero" class="alpha omega animated fadeInUpBig {% if settings.frontpage_hero_header == blank %}no-text{% endif %}">
+		<a href="{{ settings.banner_url }}"><img src="{{ 'hero.jpg' | asset_url }}" alt="{{ settings.frontpage_hero_alt }}"></a>
+	</section>
+</div>
+<!--END BANNER-->
+{% endif %}
+
+ {% if collections[settings.frontpage_collection].products.size == 0 %}
+
+ <br>
+
+ <div class="helper-section clearfix">
+
+ 	<div class="note helper-note">
+ 		<h3>Add a product to the Frontpage collection</h3>
+ 		<p>It takes less than a minute to <a href="/admin/products">add your first product</a> to your store. Make sure you add it to the <strong>Frontpage</strong> collection.</p>
+ 		<p class="p0">You can also pick which collection gets featured in this area or show a banner here by editing your <a href="/admin/themes/current/settings">Theme Settings</a>.</p>
+ 	</div>
+
+ 	<div class="helper-content">
+
+ 		 <section class="product-grid twelve columns alpha omega">
+
+ 		 <div class="four columns alpha">
+ 		 	<a href="#" id="product-1" class="animated fadeInUpBig">
+ 		 		<div class="sample-product-wrapper">
+ 		 			<div class="sample-product">Product image</div>
+ 		 		</div>
+ 		 		<h3>Test Product</h3>
+ 		 		<h4><small>From</small> {{ 2000 | money }} </h4>
+ 		 	</a>
+ 		 </div>
+
+ 		 <div class="four columns">
+ 		 	<a href="#" id="product-1" class="animated fadeInUpBig">
+ 		 		<div class="sample-product-wrapper">
+ 		 			<div class="sample-product">Product image</div>
+ 		 		</div>
+ 		 		<h3>Test Product</h3>
+ 		 		<h4><small>From</small> {{ 2000 | money }} </h4>
+ 		 	</a>
+ 		 </div>
+
+ 		 <div class="four columns omega">
+ 		 	<a href="#" id="product-1" class="animated fadeInUpBig">
+ 		 		<div class="sample-product-wrapper">
+ 		 			<div class="sample-product">Product image</div>
+ 		 		</div>
+ 		 		<h3>Test Product</h3>
+ 		 		<h4><small>From</small> {{ 2000 | money }} </h4>
+ 		 	</a>
+ 		 </div>
+ 		 
+ 		</section>
+ 		
+ 	</div><!-- helper content -->
+ </div><!-- helper section -->
+
+{% else %}
+
+<br>
+
+
+<section class="product-grid twelve columns alpha omega">
+	{% assign collection = collections.[settings.frontpage_collection] %}
+	{% for product in collection.products %}
+		{% include 'product-grid-item' %}
+	{% endfor %}
+</section>
+
+{% endif %}

@@ -1,0 +1,189 @@
+{% include 'breadcrumb' %}
+{% if product.compare_at_price > product.price %}{% assign on_sale = true %}{% endif %}
+<!--START PRODUCT-->
+<div itemscope itemtype="http://schema.org/Product" class="twelve columns alpha omega">
+	<meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+	<meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}" />
+	<!-- START PRODUCT IMAGES-->
+	<section id="images" class="seven columns alpha">
+		<!-- START ZOOM IMAGE-->
+    {% if product.featured_image %}
+		<img id="feature-image" class="desktop" src="{{ product.featured_image.src | product_img_url: 'master' }}" alt="Product Image" data-zoom-image="{{ product.featured_image.src | product_img_url: 'master' }}" alt="{{ product.featured_image.alt | escape }}" />
+		<img class="mobile" src="{{ product.featured_image.src | product_img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" />
+		{% if on_sale == true %}<div class="sale">Sale</div>{% endif %}	
+    {% endif %} 
+		<!-- END ZOOM IMAGE-->
+		{% if product.images.size > 1 %}
+		<!-- START GALLERY-->
+		<section id="gallery">
+			{% for image in product.images offset:1 %}
+			<a href="{{ image.src | product_img_url: 'grande' }}" class="fancybox-media {% cycle 'first','','','last' %}">
+				<img src="{{ image.src | product_img_url: 'medium' }}" alt="{{ image.alt | escape }}" />
+			</a>
+			{% endfor %}
+		</section>
+		<!-- END GALLERY-->
+		{% endif %}
+	</section>
+	<!-- END PRODUCT IMAGES-->
+	<!--START BUY-->
+	<section id="buy" class="five columns omega">
+		<form action="/cart/add" method="post" id="product-form" class="quickAdd" enctype="multipart/form-data">
+			<h1 itemprop="name">{{ product.title }}</h1>
+			<h2 id="product-price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			      <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+			      {% if product.available %}
+			      <link itemprop="availability" href="http://schema.org/InStock" />
+			      {% else %}
+			      <link itemprop="availability" href="http://schema.org/OutOfStock" />
+			      {% endif %}
+				  {% if product.compare_at_price > product.price %}
+		          <span class="product-price on-sale" itemprop="price">{{ product.price | money }}</span>&nbsp;<del class="product-compare-price">{{ product.compare_at_price_max | money }}</del>
+		          {% else %}
+		          <span class="product-price" itemprop="price">{{ product.price | money }}</span>
+		          {% endif %}
+			</h2>
+			{% assign hide_default_title = false %}
+		    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+		        {% assign hide_default_title = true %}
+		    {% endif %} 
+			<div id="product-variants" class="{% if hide_default_title %} hidden{% endif %}">
+		       <select id="product-select" name="id" class="hidden">
+		       {% for variant in product.variants %}
+		         <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+		       {% endfor %}
+		       </select>
+		    </div>        
+		   <input type="submit" value="Add To Cart" id="add" class="btn add-to-cart" />	
+		</form>
+	    {% include 'social-sharing' %}
+		{% if settings.product_desc_right == true %}
+		<!--START PRODUCT INFO-->
+		<section id="product-info" class="right">
+			{% if settings.show_shipping_tab == true %}
+			<ul class='tabs right clearfix'>
+		    	<li class="first"><a href='#tab1'>{% if settings.description_tab_label == blank %}Product Description{% else %}{{ settings.description_tab_label }}{% endif %}</a></li>
+		    	<li><a href='#tab2'>{% if settings.shipping_tab_label == blank %}Shipping Information{% else %}{{ settings.shipping_tab_label }}{% endif %}</a></li>
+		  	</ul>
+			<div id='tab1'>
+				<div class="wysiwyg" itemprop="description">
+			    {{ product.description }}
+				</div>
+			 </div>
+			 <div id='tab2'>
+			   	<div class="wysiwyg">
+			    {{ pages[settings.shipping_tab_content].content }}
+				</div>
+			</div>
+			{% else %}
+			<div class="wysiwyg no-tabs" itemprop="description">
+		    {{ product.description }}
+			</div>
+			{% endif %}
+		</section>
+		<!--END PRODUCT INFO-->
+		{% endif %}
+	</section>
+	<!--END BUY-->
+	<br class="clear">
+	{% if settings.product_desc_right == false %}
+	<!--START PRODUCT INFO-->
+	<section id="product-info">
+		{% if settings.show_shipping_tab == true %}
+		<ul class='tabs clearfix'>
+	    	<li class="first"><a href='#tab1'>{% if settings.description_tab_label == blank %}Product Description{% else %}{{ settings.description_tab_label }}{% endif %}</a></li>
+	    	<li><a href='#tab2'>{% if settings.shipping_tab_label == blank %}Shipping Information{% else %}{{ settings.shipping_tab_label }}{% endif %}</a></li>
+	  	</ul>
+		<div id='tab1'>
+			<div class="wysiwyg" itemprop="description">
+		    {{ product.description }}
+			</div>
+		 </div>
+		 <div id='tab2'>
+		   	<div class="wysiwyg">
+		    {{ pages[settings.shipping_tab_content].content }}
+			</div>
+		</div>
+		{% else %}
+		<div class="wysiwyg no-tabs" itemprop="description">
+	    {{ product.description }}
+		</div>
+		{% endif %}
+	</section>
+	<!--END PRODUCT INFO-->
+	{% endif %}
+
+	{% assign current_product = product.handle %}
+	{% assign current_collection = collection.handle %}	
+	{% assign found_current_product = false %}
+
+	{% if current_collection != blank and collection.all_products_count > 1 %}
+		<!--START PRODUCT GRID-->
+		<section id="related-products" class="product-grid twelve columns alpha omega">
+		<h2>{% if settings.related_products_header == blank %}You Might Also Like...{% else %}{{ settings.related_products_header }}{% endif %}</h2>
+
+		{% comment %}Show three products from the current collection but make sure that doesn't include the current product{% endcomment %}
+		{% for product in collections[current_collection].products limit: 3 %}
+			{% if product.handle == current_product %}
+				{% assign found_current_product = true %}
+			{% endif %}
+		{% endfor %}
+		{% if found_current_product == true %}
+			{% comment %}Get four products but skip the current product - that gives us three products we can show {% endcomment %}
+			{% for product in collections[current_collection].products limit: 4 %}
+				{% unless product.handle == current_product %}
+					{% include 'product-grid-item' %}
+				{% endunless %}
+			{% endfor %}
+		{% else %}
+			{% comment %}Get three products because we know these don't include the current product {% endcomment %}
+			{% for product in collections[current_collection].products limit: 3 %}
+				{% include 'product-grid-item' %}
+			{% endfor %}
+		{% endif %}
+		</section>
+		<!--END PRODUCT GRID-->
+		<br class="clear">
+	{% endif %}
+
+</div>
+<!--END PRODUCT-->
+<script>
+var selectCallback = function(variant, selector) {
+  if (variant) {
+    if (variant.available) {
+      // Selected a valid variant that is available.
+      jQuery('#add').removeClass('disabled').removeAttr('disabled').val('Add to Cart').fadeTo(200,1);
+    } else {
+      // Variant is sold out.
+      jQuery('#add').val('Sold Out').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);        
+    }
+    // Whether the variant is in stock or not, we can update the price and compare at price.
+    if ( variant.compare_at_price > variant.price ) {
+      jQuery('#product-price').html('<span class="product-price on-sale">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<del class="product-compare-price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</del>');
+    } else {
+      jQuery('#product-price').html('<span class="product-price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+    }        
+  } else {
+    // variant doesn't exist.
+    jQuery('#add').val('Unavailable').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+  }
+};
+jQuery(function($) {
+  new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback });
+  // Add label if only one product option and it isn't 'Title'.
+  {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+  {% endif %}
+  // Auto-select first available variant on page load.
+  {% assign found_one_in_stock = false %}
+  {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock == false %}
+      {% assign found_one_in_stock = true %}
+      {% for option in product.options %}
+      $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+});
+</script>

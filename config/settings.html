@@ -1,0 +1,325 @@
+<fieldset>
+	<legend>Aesthetics</legend>
+	
+	<h3>Colours</h3>
+	<table>
+		<tr>
+			<td><label for="background_color">Background color</label></td>
+			<td><input name="background_color" class="color" type="text" value="#ffffff" /></td>
+		</tr>
+		<tr>
+			<td><label for="first_color">Primary color<br /><small>Text color, dark borders</small></label></td>
+			<td><input name="first_color" class="color" type="text" value="#333333" /></td>
+		</tr>
+		<tr>
+			<td><label for="second_color">Secondary color<br /><small>Used for links hover states and light text</small></label></td>
+			<td><input name="second_color" class="color" type="text" value="#999999" /></td>
+		</tr>
+		<tr>
+			<td><label for="heading_color">Headings color<br /><small>Used for text headings</small></label></td>
+			<td><input name="heading_color" class="color" type="text" value="#999999" /></td>
+		</tr>
+		<tr>
+			<td><label for="lighter_color">Lighter border color<br /><small>Used for light borders</small></label></td>
+			<td><input name="lighter_color" class="color" type="text" value="#e8e8e8" /></td>
+		</tr>
+		<tr>
+			<td><label for="accent_color">Accent color<br /><small>Sale icon</small></label></td>
+			<td><input name="accent_color" class="color" type="text" value="#ff0000" /></td>
+		</tr>
+	</table>
+	
+	<h3>Fonts</h3>
+	<table>
+		<tr>
+			<td><label for="header_font">Headers</label></td>
+			<td>
+				<select name="header_font" id="header_font">
+					<option value="Times, TimesNewRoman, 'Times New Roman', Baskerville, Georgia, serif" selected="selected">Times</option>
+					<option value="'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif">Helvetica/Arial</option>
+					<option value="'PT Serif', serif">PT Serif</option>
+					<option value="'Cabin', sans-serif">Cabin</option>
+					<option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+					<option value="'Open Sans Condensed', sans-serif">Open Sans Condensed</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td><label for="body_font">Body Font</label></td>
+			<td>
+				<select name="body_font" id="body_font">
+					<option value="'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif" selected="selected">Helvetica/Arial</option>
+					<option value="Times, TimesNewRoman, 'Times New Roman', Baskerville, Georgia, serif" >Times</option>
+					<option value="'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace" >Courier</option>
+					<option value="'PT Serif', serif">PT Serif</option>
+					<option value="'Source Sans Pro', sans-serif">Source Sans Pro</option>
+					<option value="'Open Sans Condensed', sans-serif">Open Sans Condensed</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+
+</fieldset>
+<fieldset>
+  <legend>Navigation</legend>
+  <table>
+  	<tr class="horizontal">
+      <th><label for="secondary_menu">Secondary Menu</label></th>
+      <td>
+          <select class="linklist" name="secondary_menu" />
+      </td>
+    </tr>
+  </table>
+</fieldset>
+<fieldset>
+	  <legend>Header </legend>
+ 
+	  <h3>Logos</h3>
+	  <table>
+	  	<tr>
+	  		<td><label for="use_logo">Use custom logo? <br /><small>Recommended 400px by 172px PNG</small></label></td>
+	  		<td><input type="checkbox" id="use_logo" name="use_logo" /></td>
+	  	</tr>
+	  	<tr>
+	  		<td><label for="logo_image">Upload custom logo</label></td>
+	  		<td><input type="file" name="logo.png" id="logo_image" /></td>
+	  	</tr>
+	  	<tr>
+	  		<td><label for="use_logo_checkout">Use custom logo on checkout? <br /><small>Recommended 400px by 172px PNG</small></label></td>
+	  		<td><input type="checkbox" id="use_logo_checkout" name="use_logo_checkout" /></td>
+	  	</tr>
+	  	<tr>
+	  		<td><label for="logo_image_checkout">Upload custom logo on checkout</label></td>
+	  		<td><input type="file" name="logo_checkout.png" id="logo_image_checkout" /></td>
+	  	</tr>
+	</table>
+	
+	<h3>Tagline</h3>
+	<table>
+	  	<tr>
+			<td><label for="tagline">Store tagline <br /><small>The tagline is displayed to the right of the logo in the header.</small></label></td>
+			<td><input type="text" name="tagline" id="tagline" class="long" /></td>
+	    </tr>
+	  </table>
+	
+	
+	<h3>Icon colors</h3>
+	<table>
+	  	<tr>
+	    	<td><label for="light_search_icon">Use white search icon instead</label></td>
+	    	<td><input type="checkbox" id="light_search_icon" name="light_search_icon" /></td>
+	    </tr>
+	  	<tr>
+	    	<td><label for="light_cart_icon">Use white cart icon instead</label></td>
+	    	<td><input type="checkbox" id="light_cart_icon" name="light_cart_icon" /></td>
+	    </tr>
+	 </table>
+	
+	
+</fieldset>
+<fieldset>
+	  <legend>Social Media </legend>
+	  <p><small>Social media links appear as icons in the sidebar</small></p>
+	
+	  <table>
+	    <tr>
+	    	<td><label for="facebook_url">Your Facebook page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="facebook_url" id="facebook_url" /></td>
+	    </tr>
+		<tr>
+			<td><label for="twitter_url">Your Twitter page URL <br /><small>Start the URL with http://</small></label></td>
+			<td><input type="text" name="twitter_url" id="twitter_url" /></td>
+		</tr>
+	    <tr>
+	    	<td><label for="instagram_url">Your Instagram page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="instagram_url" id="instagram_url" /></td>
+	    </tr>
+	    <tr>
+	    	<td><label for="pinterest_url">Your Pinterest page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="pinterest_url" id="pinterest_url" /></td>
+	    </tr>
+         <tr>
+	    	<td><label for="googleplus_url">Your Google+ page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="googleplus_url" id="googleplus_url" /></td>
+	    </tr>
+	    <tr>
+	    	<td><label for="youtube_url">Your YouTube page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="youtube_url" id="youtube_url" /></td>
+	    </tr>
+	    <tr>
+	    	<td><label for="vimeo_url">Your Vimeo page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="vimeo_url" id="vimeo_url" /></td>
+	    </tr>
+	    <tr>
+	    	<td><label for="flickr_url">Your Flickr page URL<br /><small>Start the URL with http://</small></label></td>
+	    	<td><input type="text" name="flickr_url" id="flickr_url" /></td>
+	    </tr>
+		<tr>
+	    	<td><label for="show_rss">Show RSS?</label></td>
+	    	<td><input type="checkbox" id="show_rss" name="show_rss" /></td>
+	    </tr>
+		<tr>
+	    	<td><label for="main_blog">Your blog </label></td>
+	    	<td><select class="blog" name="main_blog" /></td>
+	    </tr>
+	  </table>
+	  <h3>Use black Social Media Icons</h3>
+	  <table>
+	  	<tr>
+	    	<td><label for="light_social_icons">Use black social icons<br /></label></td>
+	    	<td><input type="checkbox" id="light_social_icons" name="light_social_icons" /></td>
+	    </tr>
+	 </table>
+
+</fieldset>
+
+<fieldset>
+	<legend>Footer</legend>
+	
+	<h3>Mailing list signup form</h3>
+	<p><small>You can use Mailchimp or Shopify to handle Email Alerts sign ups. By default, the theme uses Shopify (whenever a user signs up a tagged customer account is created). If you want to use Mailchimp instead, enter your Mailchimp Form Action URL below:</small></p>
+	
+	<table>  
+	  <tr>
+	    	<td><label for="show_signup_form">Show signup form?</label></td>
+	    	<td><input type="checkbox" id="show_signup_form" name="show_signup_form" /></td>
+	  	</tr>
+		<tr>
+	    	<td><label for="mailchimp_form_action">MailChimp form action URL <a target="_blank" href="http://support.shopify.com/customer/portal/articles/640278">( ? )</a></label></td>
+	    	<td><input type="text" id="mailchimp_form_action" name="mailchimp_form_action" class="long" /></td>
+	  	</tr>
+	</table>
+	
+	<h3>Footer Content</h3>
+	<p><small>What page content do you want to show in the footer? By default the theme uses the About page.</small></p>
+	
+	<table>  
+		<tr>
+	    	<td><label for="footer_page">Select page</label></td>
+	    	<td><select class="page" name="footer_page" /></td>
+	    </tr>
+	</table>
+	
+	<h3>Payment methods:</h3>
+	  <table class="standard-table">
+	    <tr>
+	      <td>
+	        <input type="checkbox" id="show_amex" name="show_amex" value="1" checked="checked" />
+	        <label for="show_amex">American Express</label>
+	      </td>
+	      <td>
+	        <input type="checkbox" id="show_discover" name="show_discover" value="1" checked="checked" />
+	        <label for="show_discover">Discover</label>
+	      </td>
+	      <td>
+	        <input type="checkbox" id="show_visa" name="show_visa" value="1" checked="checked" />
+	        <label for="show_visa">Visa</label>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>
+	        <input type="checkbox" id="show_mastercard" name="show_mastercard" value="1" checked="checked" />
+	        <label for="show_mastercard">Mastercard</label>
+	      </td>
+	      <td>
+	        <input type="checkbox" id="show_maestro" name="show_maestro" value="1" checked="checked" />
+	        <label for="show_maestro">Maestro</label>
+	      </td>
+	      <td>
+	        <input type="checkbox" id="show_cirrus" name="show_cirrus" value="1" checked="checked" />
+	        <label for="show_cirrus">Cirrus</label>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>
+	        <input type="checkbox" id="show_paypal" name="show_paypal" value="1" checked="checked" />
+	        <label for="show_paypal">Paypal</label>
+	      </td>
+	      <td colspan="1">
+	        <input type="checkbox" id="show_google" name="show_google" value="1" checked="checked" />
+	        <label for="show_google">Google Wallet</label>
+	      </td>
+	      <td colspan="1">
+	        <input type="checkbox" id="show_bitcoin" name="show_bitcoin" value="1" checked="checked" />
+	        <label for="show_bitcoin">Bitcoin</label>
+	      </td>
+	    </tr>
+	  </table>
+	
+</fieldset>
+
+<fieldset>
+ 	<legend>Frontpage </legend>
+	
+	<h3>Banner Image</h3>
+	<table>
+
+
+			<tr>
+				<td><label for="show_frontpage_hero">Show a banner image on the frontpage?</label></td>
+				<td><input type="checkbox" id="show_frontpage_hero" name="show_frontpage_hero" /></td>
+			</tr>
+			<tr>
+				<td><label for="frontpage_hero">Upload banner image<br /><small>Should be at least 950px wide</small></label></td>
+				<td><input type="file" name="hero.jpg" id="frontpage_hero" /></td>
+			</tr>
+			<tr>
+				<td><label for="banner_url">Banner url<br /><small>Where does the banner image link</small></label></td>
+				<td><input type="text" name="banner_url" id="banner_url" /></td>
+			</tr>
+			<tr>
+				<td><label for="frontpage_hero_alt">Banner ALT text</label></td>
+				<td><input type="text" name="frontpage_hero_alt" id="frontpage_hero_alt" /></td>
+			</tr>
+            
+
+		</table>
+
+			<h3>Featured Products</h3>
+			<table>
+				<tr>
+			    	<td><label for="frontpage_collection">Frontpage collection <br /><small>Select which product collection will appear on the frontpage of your store.</small></label></td>
+			    	<td><select class="collection" name="frontpage_collection" /></td>
+			  </tr>
+			</table>
+	
+
+
+</fieldset>
+<fieldset>
+ 	<legend>Product Page </legend>
+
+	<h3>Page Layout</h3>
+	<table>
+		<tr>
+			<td><label for="product_desc_right">Show product description to the right of the main image?</label></td>
+			<td><input type="checkbox" id="product_desc_right" name="product_desc_right" value="0" /></td>
+		</tr>
+	</table>
+	
+	<h3>Show an extra tab of info on the product page</h3>
+	<table>
+		<tr>
+	    	<td><label for="show_shipping_tab">Show an extra info tab on the product pages? <small>Great for showing shipping rates</small></label></td>
+	    	<td><input type="checkbox" id="show_shipping_tab" name="show_shipping_tab" /></td>
+	    </tr>
+		<tr>
+	    	<td><label for="shipping_tab_label">Extra tab label<br /><small>What do you want to call the tab? By default the theme uses 'Shipping Information'</small></label></td>
+	    	<td><input type="text" name="shipping_tab_label" /></td>
+	  	</tr>
+		<tr>
+	    	<td><label for="shipping_tab_content">Extra tab content<br /><small>Select which page will appear in the shipping tab on the product page.</small></label></td>
+	    	<td><select class="page" name="shipping_tab_content" /></td>
+	  	</tr>
+		<tr>
+	    	<td><label for="description_tab_label">Product description tab label<br /><small>What do you want to call the tab? By default theme uses 'Product Description'</small></label></td>
+	    	<td><input type="text" name="description_tab_label" /></td>
+	  	</tr>
+	  	<tr>
+	  		<td><label for="related_products_header">Related products header<br /><small>By default theme uses 'You Might Also Like...' and shows related products from the current collection.</small></label></td>
+	  		<td><input type="text" name="related_products_header" /></td>
+	  	</tr>
+
+	</table>
+
+</fieldset>

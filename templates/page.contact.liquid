@@ -1,0 +1,54 @@
+{% include 'breadcrumb' %}
+
+<h1>{{ page.title }}</h1>
+<div class="wysiwyg">
+  {{ page.content }}	
+</div>
+
+<div class="twelve columns alpha omega">
+  <div class="six columns alpha">
+  {% form 'contact' %}
+
+  {% if form.posted_successfully? %}
+    <div class="successForm feedback">
+      <p>Thanks for contacting us! We'll get back to you as soon as possible.</p>
+    </div>
+  {% endif %}
+
+  {% if form.errors %}
+    <div class="errorForm feedback">
+      <p>Oops, sorry. We were unable to submit your inquiry because it contained {{ form.errors | size | pluralize: 'an error', 'a few errors' }}. Please correct the following and submit again:</p>
+      {% for field in form.errors %}
+      <p>The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}.</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+    <div class="clearfix large_form">
+      <label for="contact_name" class="contact">Name</label>
+      <input type="text" value="" name="contact[name]" id="contact_name" class="long" />
+    </div>
+  
+    <div class="clearfix large_form">
+      <label for="contact_email" class="contact">Email Address</label>
+      <input required type="email" value="" name="contact[email]" id="contact_email" class="long" />
+    </div>
+  
+    <div class="clearfix large_form">
+      <label for="contact_phone" class="contact">Phone Number</label>
+      <input required type="text" value="" name="contact[phone]" id="contact_phone" class="long" />
+    </div>
+  
+    <div class="clearfix large_form">
+      <label for="contact_body" class="contact">Message</label>
+      <textarea required name="contact[body]" id="contact_body" class="long"></textarea>
+    </div>
+  
+    <div class="action_bottom">
+      <input type="submit" class="button" value="Send" />
+    </div>
+
+  {% endform %}
+		
+  </div>
+</div>

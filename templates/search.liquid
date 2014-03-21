@@ -1,0 +1,31 @@
+{% include 'breadcrumb' %}
+{% paginate search.results by 50 %}
+<h1>Search Results</h1>
+{% if search.performed %}
+  {% if search.results_count == 0 %}  
+  <div id="keyword">
+    No results found for <span>{{ search.terms | escape }}</span>
+  </div>
+  {% else %}
+  <div id="keyword">
+    Showing results for <span>{{ search.terms | escape }}</span>
+  </div>
+  <!--START PRODUCT GRID-->
+  <section class="product-grid">
+    {% for item in search.results %}
+      {% comment %} If we have a product {% endcomment %}
+      {% if item.type != '' %}
+      {% assign product = item %}
+      {% include 'product-grid-item' %}
+      {% endif %}
+    {% else %}
+      <p>There are no products in this view.</p>
+    {% endfor %}
+  </section>
+  <!--END PRODUCT GRID-->
+  {% endif %}
+{% else %}
+<p>No search performed. If you are looking for something, please try our <a href="/">homepage</a></p>
+{% endif %}
+{% include 'paging' %}
+{% endpaginate %} 

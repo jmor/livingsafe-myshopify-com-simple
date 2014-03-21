@@ -1,0 +1,33 @@
+<!-- START SHARE-->
+<section id="share" class="clearfix">
+	<div class="google">
+		<!-- Place this tag where you want the +1 button to render. -->
+		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="50"></div>
+		<!-- Place this tag after the last +1 button tag. -->
+		<script type="text/javascript">
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+	</div>
+	<div class="twitter">
+		<a href="https://twitter.com/share" class="twitter-share-button" {% if settings.twitter_url != blank %}data-via="{{ settings.twitter_url | remove: 'http://www.twitter.com/' }}"{% endif %}>Tweet</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+	<div class="pinterest">
+		{% if template == 'article' %}
+			{% assign product = collections.frontpage.products.first %}
+			<a href="http://pinterest.com/pin/create/button/?url={{ shop.url }}/{{ article.url}}&media={% if settings.use_logo == true %}{{ 'logo.png' | asset_url }}{% else %}
+			{{ product.featured_image | product_img_url: 'medium' }}{% endif %}&description={{ article.title }}" class="pin-it-button" count-layout="none">Pin It</a>
+		{% else %}
+			<a href="http://pinterest.com/pin/create/button/?url={{ shop.url }}&media={{ product.featured_image | product_img_url: 'large' | split:'?' | first  }}&description={{ product.title }}" class="pin-it-button" count-layout="none">Pin It</a>
+			{% endif %}
+			<script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script>
+	</div>
+	<div class="facebook">
+      <iframe src="//www.facebook.com/plugins/like.php?href={{ shop.url }}{{ product.url }}{{ article.url }}&amp;width=300&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:21px;" allowTransparency="true"></iframe>
+	</div>
+</section>
+<!-- END SHARE-->
