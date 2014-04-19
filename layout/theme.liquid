@@ -167,6 +167,9 @@
     <!--START CONTAINER-->
     <div class="container lower">
       <div class="sixteen columns">
+        <!--
+        <div class="table logo-tagline">
+          <div class="table-cell"> -->
         <div class="table logo-tagline">
           <div class="table-cell">
             <h1 id="logo">
@@ -277,61 +280,38 @@
               <a href="{{ link.url }}">{{ link.title }}</a> {% unless forloop.last %}<br>{% endunless %}
             {% endfor %}
           </nav>
+          {% if settings.show_signup_form %}{% include 'credit-cards' %}{% endif %}
         </div>
         <!--END NAV-->
 
         <!--START PAGE CONTENT-->
         <div class="eight offset-by-one columns">
+          {% if settings.show_signup_form %}{% include 'mailChimp' %}{% endif %}
           <div id="footer-content">
             {% if settings.footer_page == blank %}
             {% else %}
             <h2>{{ pages[settings.footer_page].title }}</h2>
             <div>{{ pages[settings.footer_page].content }}</div>
             {% endif %}
-            {% if settings.show_signup_form %}{% include 'credit-cards' %}{% endif %}
           </div>
         </div>
         <!--END PAGE CONTENT-->
 
         <!--START MAILING LIST / OR CREDIT CARDS-->
-        <div class="three columns offset-by-one">
-          {% if settings.show_signup_form %}
-          <div id="mailing-list">
-            <h2>Mailing List</h2>
-            {% if settings.mailchimp_form_action.size > 0 %}
-            <form action="{{ settings.mailchimp_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-              <label>Your Email Address</label>
-              <input type="email" placeholder="you@email.com" name="EMAIL" id="email-input" />
-              <input type="submit" value="Sign Up" id="email-submit" />
-            </form>
-            {% else %}
-              <form id="email-alerts-footer" class="mailing-list" action="/contact" method="post">
-                <input type="hidden" value="customer" name="form_type">  
-                <span class="success"><em>Thank you for signing up!</em></span>
-                <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,mailing-list" />
-                <input type="hidden" id="mailinglist-first-name" name="contact[first_name]" value="Subscriber" />
-                <input type="hidden" id="mailinglist-last-name" name="contact[last_name]" value="Mailing List" />
-                <label>Your Email Address</label>
-                <input type="email" placeholder="you@email.com" name="contact[email]" id="email-input" class="required email" />
-                <input type="submit" value="Sign Up" class="button secondary" name="subscribe" id="email-submit" />
-              </form>
-            {% endif %}
-          </div>
-          {% else %}
-          {% include 'credit-cards' %}
-          {% endif %}
+        <div class="three columns">
+          
         </div>
         <!--END MAILING LIST / CREDIT CARDS-->
 
         <br class="clear">
       </section>
       <section class="lower">
-        <div class="nine columns">
+        <div class="left-legals">
           <div class="legals">
-            Copyright &copy; {{ "now" | date: "%Y" }} {{ shop.name }}. {{ powered_by_link }}.
+            Copyright &copy; {{ "now" | date: "%Y" }} {{ shop.name }}.
           </div>
         </div>
-        <div class="six columns offset-by-one">
+        <div class="right-bot offset-by-one">
           {% if linklists.footer.links.size > 0 %}
           <nav>
             {% for link in linklists.footer.links %}

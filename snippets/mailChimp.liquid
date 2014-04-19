@@ -1,0 +1,20 @@
+<div id="mailing-list">
+            <h2>Get updates about New Products & Offers</h2>
+            {% if settings.mailchimp_form_action.size > 0 %}
+            <form action="{{ settings.mailchimp_form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+              <input type="email" placeholder="enter your email address..." name="EMAIL" id="email-input" />
+              <input type="submit" value="Subscribe" id="email-submit" />
+            </form>
+            {% else %}
+              <form id="email-alerts-footer" class="mailing-list" action="/contact" method="post">
+                <input type="hidden" value="customer" name="form_type">  
+                <span class="success"><em>Thank you for signing up!</em></span>
+                <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,mailing-list" />
+                <input type="hidden" id="mailinglist-first-name" name="contact[first_name]" value="Subscriber" />
+                <input type="hidden" id="mailinglist-last-name" name="contact[last_name]" value="Mailing List" />
+                <label>Your Email Address</label>
+                <input type="email" placeholder="you@email.com" name="contact[email]" id="email-input" class="required email" />
+                <input type="submit" value="Sign Up" class="button secondary" name="subscribe" id="email-submit" />
+              </form>
+            {% endif %}
+</div>
